@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
-@RestControllerAdvice
+@RestControllerAdvice //전역 예외 처리기
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<ErrorResponse> handleResponseStatusException(
+    @ExceptionHandler(ResponseStatusException.class) //ResponseStatusException 예외 처리
+    public ResponseEntity<ErrorResponse> handleResponseStatusException( //responseEntitiy는 HTTP status code와 body를 같이 설정해서 반환하는 객체
             ResponseStatusException e
     ) {
 

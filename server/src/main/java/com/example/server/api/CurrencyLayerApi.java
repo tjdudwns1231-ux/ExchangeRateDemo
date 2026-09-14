@@ -51,6 +51,11 @@ public class CurrencyLayerApi {
             return response;
 
         } catch (RestClientException e) {
+
+            System.out.println("=== CurrencyLayer API ERROR ===");
+            System.out.println(e.getClass().getName());
+            System.out.println(e.getMessage());
+
             throw new ResponseStatusException(
                     HttpStatus.BAD_GATEWAY,
                     "환율 API 호출에 실패했습니다."
