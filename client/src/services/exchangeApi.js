@@ -1,4 +1,4 @@
-export async function getExchangeRate(currency) {
+export async function getExchangeRate(currency) { // 환율 조회 API 호출
   const response = await fetch(
     `http://localhost:8080/api/exchange-rates/${currency}`
   );
@@ -14,7 +14,7 @@ export async function getExchangeRate(currency) {
   return data;
 }
 
-export async function calculateExchange(currency, amount) {
+export async function calculateExchange(currency, amount) { // 송금 계산 API 호출
   const response = await fetch(
     "http://localhost:8080/api/exchange",
     {

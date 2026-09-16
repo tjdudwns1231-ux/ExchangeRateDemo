@@ -1,6 +1,6 @@
 package com.example.server.dto;
 
-public class CurrencyLayerError {
+public class CurrencyLayerError { //이 클래스는 CurrencyLayer API에서 발생한 오류를 나타내는 DTO(Data Transfer Object)입니다.
 
     private Integer code;
     private String info;

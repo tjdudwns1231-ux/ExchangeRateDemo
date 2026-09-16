@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import "./ExchangeForm.css";
-import {
-  getExchangeRate,
-  calculateExchange,
-} from "../services/exchangeApi";
+import {getExchangeRate, calculateExchange,} from "../services/exchangeApi";
 
-function formatNumber(value) {
+function formatNumber(value) { // 숫자를 통화 형식으로 포맷팅하는 함수
   if (value == null) {
     return "0.00";
   }
@@ -16,27 +13,27 @@ function formatNumber(value) {
   });
 }
 
-function ExchangeForm() {
+function ExchangeForm() { // 환율 계산 폼 컴포넌트
   const [recipientCurrency, setRecipientCurrency] = useState("KRW"); //선택된 통화
   const [rate, setRate] = useState(null); // 현재 환율
   const [amount, setAmount] = useState(""); // 사용자가 입력한 송금액
   const [result, setResult] = useState(null); // 송금 계산 결과
   const [error, setError] = useState(""); // 계산 실패 시 보여줄 에러 메시지
 
-  useEffect(() => {
-    async function fetchRate() {
+  useEffect(() => { // 화면에서 사용자가 통화(recipientCurrency)를 변경할 때마다 환율을 조회
+    async function fetchRate() { 
       try {
-        const data = await getExchangeRate(recipientCurrency);
-        setRate(data.rate);
+        const data = await getExchangeRate(recipientCurrency); //환율조회API 호출
+        setRate(data.rate); // 조회된 환율을 setRate 상태에 저장
       } catch (error) {
         console.error(error);
       }
     }
 
     fetchRate();
-  }, [recipientCurrency]);
+  }, [recipientCurrency]); // recipientCurrency가 변경될 때마다 fetchRate 함수 호출 /  handleCurrencyChange(e)가 호출될 때마다 recipientCurrency가 변경되므로 useEffect가 실행됨
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e) { // submit으로 폼 제출하면 호출되는 함수
     e.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
 
     setError("");
@@ -45,20 +42,20 @@ function ExchangeForm() {
       amount.trim() === "" ? null : Number(amount); // 사용자가 입력한 송금액을 숫자로 변환
 
     try {
-      const data = await calculateExchange(
+      const data = await calculateExchange( // 송금 계산 API 호출
         recipientCurrency,
         parsedAmount
       );
 
-      setResult(data);
+      setResult(data); // 송금 계산 결과를 setResult 상태에 저장
     } catch (error) {
       setError(error.message);
       setResult(null);
     }
   }
 
-  function handleCurrencyChange(e) {
-    setRecipientCurrency(e.target.value);
+  function handleCurrencyChange(e) { // 사용자가 통화를 변경하면 호출되는 함수
+    setRecipientCurrency(e.target.value); 
 
     // 이전 통화의 계산 결과를 그대로 보여주지 않도록 초기화
     setResult(null);
@@ -68,7 +65,7 @@ function ExchangeForm() {
   return (
     <form
       className="exchange-form"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit} // 폼 제출 시 handleSubmit 함수 호출
     >
       <h1 className="exchange-form__title">환율 계산</h1>
 
@@ -83,7 +80,7 @@ function ExchangeForm() {
         <select
           id="recipientCountry"
           value={recipientCurrency}
-          onChange={handleCurrencyChange}
+          onChange={handleCurrencyChange} // 사용자가 통화를 변경하면 handleCurrencyChange 함수 호출
         >
           <option value="KRW">한국 (KRW)</option>
           <option value="JPY">일본 (JPY)</option>
@@ -95,7 +92,7 @@ function ExchangeForm() {
         <label>환율</label>
 
         <p>
-          1 USD = {formatNumber(rate)} {recipientCurrency}
+          1 USD = {formatNumber(rate)} {recipientCurrency} {/* // 조회된 환율을 통화 형식으로 포맷팅하여 보여줌 */}
         </p>
       </div>
 
@@ -108,7 +105,7 @@ function ExchangeForm() {
             type="text"
             placeholder="송금액을 입력하세요"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => setAmount(e.target.value)} // 사용자가 송금액을 입력하면 setAmount 상태를 업데이트
           />
 
           <span>USD</span>
