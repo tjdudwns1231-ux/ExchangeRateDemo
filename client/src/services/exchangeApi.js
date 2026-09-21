@@ -3,9 +3,9 @@ export async function getExchangeRate(currency) { // 환율 조회 API 호출
     `http://localhost:8080/api/exchange-rates/${currency}`
   );
 
-  const data = await response.json();
+  const data = await response.json(); // 응답을 JSON 형식으로 변환하여 data 변수에 저장
 
-  if (!response.ok) {
+  if (!response.ok) { // 응답이 정상적이지 않으면 에러를 발생시킨다.
     throw new Error(
       data.message || "환율 조회에 실패했습니다."
     );
@@ -29,9 +29,9 @@ export async function calculateExchange(currency, amount) { // 송금 계산 API
     }
   );
 
-  const data = await response.json();
+  const data = await response.json(); 
 
-  if (!response.ok) {
+  if (!response.ok) { // 응답이 정상적이지 않으면 에러를 발생시킨다.
     throw new Error(
       data.message || "송금 계산에 실패했습니다."
     );

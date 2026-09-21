@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice 
-public class GlobalExceptionHandler { //GlobalExceptionHandler 클래스는 전역 예외 처리기 역할을 수행하며, 컨트롤러에서 발생한 예외를 처리하고 적절한 HTTP 응답을 반환한다.
+public class GlobalExceptionHandler { //GlobalExceptionHandler 클래스는 전역 예외 처리기 역할을 수행하며, 발생한 예외를 처리하고 적절한 HTTP 응답을 반환한다.
                                         // @RestControllerAdvice 어노테이션을 사용하여 스프링부트가 이 클래스를 전역 예외 처리기로 인식하도록 한다.
 
     @ExceptionHandler(ResponseStatusException.class) //ResponseStatusException이 발생하면 아래 메서드가 처리한다.

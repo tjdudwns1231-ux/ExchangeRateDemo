@@ -15,7 +15,7 @@ public class CurrencyLayerApi { //CurrencyLayerApi 클래스는 외부 환율 AP
     @Value("${currencylayer.access-key}")
     private String accessKey; // application-secret.properties에서 가져온 access key (API key)
 
-    public CurrencyLayerApi(RestTemplate restTemplate) { // 외부 api 호출을 위해 RestTemplate 주입
+    public CurrencyLayerApi(RestTemplate restTemplate) { // 외부 api 호출을 위해 RestTemplate 생성자 주입
         this.restTemplate = restTemplate;
     }
 
