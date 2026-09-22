@@ -1,3 +1,5 @@
 https://github.com/tjdudwns1231-ux/ExchangeRateDemo.git
 
 .\gradlew.bat bootrun
+
+.\gradlew test
